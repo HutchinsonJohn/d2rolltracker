@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>d2rolltracker</title>
+  <link rel="icon" href="/src/assets/kill-clip.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover" />
+</head>
+
+<style>
+  :root {
+    --black80: #21212d;
+    --white: #f5f7fc;
+  }
+
+  @font-face {
+    font-family: Neue Haas Display;
+    font-weight: bold;
+    src: url('/src/fonts/NeueHaasDisplayMedium.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: Neue Haas Display;
+    font-weight: normal;
+    src: url('/src/fonts/NeueHaasDisplayRoman.ttf') format('truetype');
+  }
+
+  .body {
+    font-family: Neue Haas Display, Helvetica, Arial, sans-serif;
+    color: var(--white);
+    background-color: var(--black80);
+  }
+
+  .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .logo {
+    display: flex;
+    justify-content: center;
+    font-size: 3.5rem;
+  }
+
+  .perk {
+    width: 2.5rem;
+    height: 2.5rem;
+    align-self: center;
+    border: 2px solid var(--white);
+    border-radius: 50%;
+
+    background-image: url('/src/assets/kill-clip.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+</style>
+
+<body class="body">
+  <div id="root"></div>
+  <script src="src/index.tsx" type="module"></script>
+  <noscript class="center">
+    <div class="logo">
+      d2r
+      <div class="perk"></div>
+      lltracker
+    </div>
+    Please enable javascript in your browser to use this website
+  </noscript>
+</body>
+
+</html>

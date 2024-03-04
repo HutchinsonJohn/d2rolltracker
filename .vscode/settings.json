@@ -1,0 +1,19 @@
+{
+  "cSpell.words": [
+    "bungie",
+    "fontawesome",
+    "fortawesome",
+    "Immer",
+    "keyval",
+    "Machinegun",
+    "quickdraw",
+    "rolltracker"
+  ],
+  "eslint.validate": ["typescriptreact", "typescript"],
+  "eslint.workingDirectories": ["./"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.eol": "\n",
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  }
+}
