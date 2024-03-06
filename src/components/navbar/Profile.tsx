@@ -6,6 +6,7 @@ import {
 } from '../../context/AccountStateContext'
 import login from '../../utils/login'
 import theme from '../../styles/theme'
+import Memberships from './Memberships'
 
 const ProfileDiv = styled.div`
   font-weight: bold;
@@ -73,6 +74,7 @@ export default function Profile() {
           />
           <ProfileDropdown>
             <div>Logged in as {accountState.displayName}</div>
+            <Memberships />
             <SettingsButton type="button" to="/settings">
               Settings
             </SettingsButton>

@@ -25,7 +25,12 @@ import UserSettings from './components/UserSettings'
 import LoadingScreen from './components/LoadingScreen'
 import { getAxiosError, getBungieError, isBungieError } from './utils/error'
 import ErrorScreen from './components/error/ErrorScreen'
-import { LOGIN, useLoginQuery, useManifestQuery } from './api/queries'
+import {
+  LOGIN,
+  USER_ROLLS,
+  useLoginQuery,
+  useManifestQuery,
+} from './api/queries'
 import { Tokens, saveTokensToLocalStorage } from './utils/oauth'
 import CookiePolicy from './components/Cookies'
 import PrivacyPolicy from './components/Privacy'
@@ -129,7 +134,22 @@ function App() {
     localStorage.removeItem('redirectTo')
     queryClient.setQueryData(LOGIN, undefined)
   }, [queryClient])
-
+  const updateDefaultMembership = useCallback(
+    (membershipId: string, membershipType: number) => {
+      queryClient.setQueryData(LOGIN, {
+        ...loginQuery.data,
+        defaultDestinyMembershipId: membershipId,
+        defaultDestinyMembershipType: membershipType,
+      })
+      localStorage.setItem('defaultDestinyMembershipId', membershipId)
+      localStorage.setItem(
+        'defaultDestinyMembershipType',
+        membershipType.toString(),
+      )
+      queryClient.removeQueries(USER_ROLLS, { exact: true })
+    },
+    [loginQuery, queryClient],
+  )
   const manifestQuery = useManifestQuery()
   if (manifestQuery.isLoading) {
     return (
@@ -160,6 +180,7 @@ function App() {
           accountState={loginQuery.data}
           updateTokens={updateTokens}
           logout={logout}
+          updateDefaultMembership={updateDefaultMembership}
         >
           <RouterProvider router={router} />
         </AccountStateProvider>

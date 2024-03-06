@@ -44,12 +44,19 @@ export const initialAccountState: AccountState = {
 
 export type AccountUpdateTokens = (tokens: Tokens) => void
 export type AccountLogout = () => void
+export type AccountUpdateDefaultMembership = (
+  membershipId: string,
+  membershipType: number,
+) => void
 
 const AccountStateContext = createContext<AccountState | undefined>(undefined)
 const AccountUpdateTokensContext = createContext<
   ((tokens: Tokens) => void) | undefined
 >(undefined)
 const AccountLogoutContext = createContext<(() => void) | undefined>(undefined)
+const AccountUpdateDefaultMembershipContext = createContext<
+  ((membershipId: string, membershipType: number) => void) | undefined
+>(undefined)
 
 export function useAccountState() {
   const data = useContext(AccountStateContext)
@@ -79,21 +86,40 @@ export function useAccountLogout() {
   return data
 }
 
+export function useAccountUpdateDefaultMembership() {
+  const data = useContext(AccountUpdateDefaultMembershipContext)
+  if (data == null) {
+    throw new Error(
+      'A component that relies on account state is used while the account state has not been initialized',
+    )
+  }
+  return data
+}
+
 export default function AccountStateProvider(props: {
   children: React.ReactNode
   accountState: AccountState | undefined
   updateTokens: AccountUpdateTokens
   logout: AccountLogout
+  updateDefaultMembership: AccountUpdateDefaultMembership
 }) {
   const accountState = useMemo(() => props.accountState, [props.accountState])
   const updateTokens = useMemo(() => props.updateTokens, [props.updateTokens])
   const logout = useMemo(() => props.logout, [props.logout])
+  const updateDefaultDestinyMembership = useMemo(
+    () => props.updateDefaultMembership,
+    [props.updateDefaultMembership],
+  )
 
   return (
     <AccountStateContext.Provider value={accountState}>
       <AccountUpdateTokensContext.Provider value={updateTokens}>
         <AccountLogoutContext.Provider value={logout}>
-          {props.children}
+          <AccountUpdateDefaultMembershipContext.Provider
+            value={updateDefaultDestinyMembership}
+          >
+            {props.children}
+          </AccountUpdateDefaultMembershipContext.Provider>
         </AccountLogoutContext.Provider>
       </AccountUpdateTokensContext.Provider>
     </AccountStateContext.Provider>

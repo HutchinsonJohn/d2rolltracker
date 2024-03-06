@@ -135,8 +135,29 @@ function buildAccountState(
   },
 ) {
   if (!isPayloadValid(decoded)) {
-    console.log('decoded', decoded)
     throw new Error('User data is incomplete')
+  }
+
+  const defaultDestinyMembershipId = localStorage.getItem(
+    'defaultDestinyMembershipId',
+  )
+  const defaultDestinyMembershipType = localStorage.getItem(
+    'defaultDestinyMembershipType',
+  )
+
+  if (
+    defaultDestinyMembershipId != null &&
+    defaultDestinyMembershipType != null
+  ) {
+    return {
+      loggedIn: true,
+      ...decoded,
+      accessToken: tokens.accessToken,
+      refreshToken: tokens.refreshToken,
+      bungieTokens: tokens.bungieTokens,
+      defaultDestinyMembershipId,
+      defaultDestinyMembershipType: +defaultDestinyMembershipType,
+    }
   }
 
   return {
@@ -283,6 +304,5 @@ export async function loginFromCode(code: string) {
     }))
 
   saveTokensToLocalStorage(tokens)
-  console.log('point1')
   return buildAccountState(await verifyAccessAndRefreshTokens(tokens), tokens)
 }
