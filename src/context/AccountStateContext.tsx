@@ -17,9 +17,9 @@ export interface AccountState {
     displayNameCode: number | undefined
     iconPath: string
   }[]
-  privateListId: string
-  publicListIds: string[]
-  subscribedListIds: string[]
+  privateList: string
+  publicLists: string[]
+  subscribedLists: string[]
   accessToken: string
   refreshToken: string
   bungieTokens: BungieTokens | undefined
@@ -34,9 +34,9 @@ export const initialAccountState: AccountState = {
   defaultDestinyMembershipId: '',
   defaultDestinyMembershipType: -1,
   destinyMembershipsDetails: [],
-  privateListId: '',
-  publicListIds: [],
-  subscribedListIds: [],
+  privateList: '',
+  publicLists: [],
+  subscribedLists: [],
   accessToken: '',
   refreshToken: '',
   bungieTokens: undefined,

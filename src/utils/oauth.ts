@@ -98,9 +98,9 @@ function isPayloadValid(payload: unknown): payload is {
     displayNameCode: number | undefined
     iconPath: string
   }[]
-  privateListId: string
-  publicListIds: string[]
-  subscribedListIds: string[]
+  privateList: string
+  publicLists: string[]
+  subscribedLists: string[]
 } {
   return (
     payload != null &&
@@ -117,12 +117,12 @@ function isPayloadValid(payload: unknown): payload is {
     typeof payload.defaultDestinyMembershipType === 'number' &&
     'destinyMembershipsDetails' in payload &&
     Array.isArray(payload.destinyMembershipsDetails) &&
-    'privateListId' in payload &&
-    typeof payload.privateListId === 'string' &&
-    'publicListIds' in payload &&
-    Array.isArray(payload.publicListIds) &&
-    'subscribedListIds' in payload &&
-    Array.isArray(payload.subscribedListIds)
+    'privateList' in payload &&
+    typeof payload.privateList === 'string' &&
+    'publicLists' in payload &&
+    Array.isArray(payload.publicLists) &&
+    'subscribedLists' in payload &&
+    Array.isArray(payload.subscribedLists)
   )
 }
 
@@ -135,6 +135,7 @@ function buildAccountState(
   },
 ) {
   if (!isPayloadValid(decoded)) {
+    console.log('decoded', decoded)
     throw new Error('User data is incomplete')
   }
 
@@ -282,6 +283,6 @@ export async function loginFromCode(code: string) {
     }))
 
   saveTokensToLocalStorage(tokens)
-
+  console.log('point1')
   return buildAccountState(await verifyAccessAndRefreshTokens(tokens), tokens)
 }
