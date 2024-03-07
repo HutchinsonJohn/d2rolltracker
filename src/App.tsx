@@ -132,6 +132,8 @@ function App() {
     localStorage.removeItem('bungieTokens')
     localStorage.removeItem('authState')
     localStorage.removeItem('redirectTo')
+    localStorage.removeItem('defaultDestinyMembershipId')
+    localStorage.removeItem('defaultDestinyMembershipType')
     queryClient.setQueryData(LOGIN, undefined)
   }, [queryClient])
   const updateDefaultMembership = useCallback(
