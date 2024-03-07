@@ -9,5 +9,5 @@ export default function login() {
   localStorage.setItem('redirectTo', pathname)
   window.location.href = `https://www.bungie.net/en/OAuth/Authorize?client_id=${
     import.meta.env.VITE_OAUTH_ID
-  }&response_type=code&state=${authState}`
+  }&response_type=code&state=${authState}&reauth=true`
 }
