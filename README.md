@@ -24,7 +24,7 @@ git clone https://github.com/HutchinsonJohn/d2rolltracker.git
 
 ### Setup .env
 
-1. Rename `.env.example` to `.env`
+1. Make a copy of `.env.example` and name it `.env`
 1. Using the keys from your bungie.net application, enter your `X_API_KEY` and `OAUTH_ID` in .env (optional)
 1. If you would like to use [your own backend](https://github.com/HutchinsonJohn/d2rolltracker-backend), set the public tokens to the corresponding tokens in your backend's .env. Otherwise rolls will be created and modified on the public database. (optional)
 
