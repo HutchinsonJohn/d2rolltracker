@@ -45,8 +45,8 @@ dependencies:
     specifier: ^9.0.12
     version: 9.0.21
   jose:
-    specifier: ^4.11.2
-    version: 4.15.4
+    specifier: ^4.15.5
+    version: 4.15.5
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -3004,8 +3004,8 @@ packages:
       set-function-name: 2.0.1
     dev: true
 
-  /jose@4.15.4:
-    resolution: {integrity: sha512-W+oqK4H+r5sITxfxpSU+MMdr/YSWGvgZMQDIsNoBDGGy4i7GBPTtvFKibQzW06n3U3TqHjhvBJsirShsEJ6eeQ==}
+  /jose@4.15.5:
+    resolution: {integrity: sha512-jc7BFxgKPKi94uOvEmzlSWFFe2+vASyXaKUpdQKatWAESU2MWjDfFf0fdfc83CDKcA5QecabZeNLyfhe3yKNkg==}
     dev: false
 
   /js-sha3@0.8.0:
