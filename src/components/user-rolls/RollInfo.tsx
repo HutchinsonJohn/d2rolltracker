@@ -26,6 +26,10 @@ const WeaponInfoColumnUl = styled.ul`
   padding: 8px;
 `
 
+const WeaponInfoColumnLi = styled.li`
+  list-style-position: inside;
+`
+
 export default function RollInfo(props: {
   perfectRolls: {
     userRoll: BestRoll
@@ -76,9 +80,9 @@ export default function RollInfo(props: {
                 <WeaponInfoColumnUl>
                   Best roll for:
                   {props.bestRolls.map((godRollMatch) => (
-                    <li key={godRollMatch.godRoll.rollId}>
+                    <WeaponInfoColumnLi key={godRollMatch.godRoll.rollId}>
                       {godRollMatch.godRoll.rollName}
-                    </li>
+                    </WeaponInfoColumnLi>
                   ))}
                 </WeaponInfoColumnUl>
               )}
