@@ -4,7 +4,7 @@ import { useImmerReducer } from 'use-immer'
 import styled from 'styled-components'
 import { captureMessage } from '@sentry/react'
 import Rolls from './user-rolls/Rolls'
-import WeaponPreview from './WeaponPreview'
+import WeaponPreview from './weapon-preview/WeaponPreview'
 import CreateARoll from './create-a-roll/CreateARoll'
 import GodRolls from './god-rolls/GodRolls'
 import {

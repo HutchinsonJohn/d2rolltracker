@@ -42,12 +42,11 @@ export const initialAccountState: AccountState = {
   bungieTokens: undefined,
 }
 
-export type AccountUpdateTokens = (tokens: Tokens) => void
-export type AccountLogout = () => void
-export type AccountUpdateDefaultMembership = (
-  membershipId: string,
-  membershipType: number,
-) => void
+export type AccountUpdateTokens = ReturnType<typeof useAccountUpdateTokens>
+export type AccountLogout = ReturnType<typeof useAccountLogout>
+export type AccountUpdateDefaultMembership = ReturnType<
+  typeof useAccountUpdateDefaultMembership
+>
 
 const AccountStateContext = createContext<AccountState | undefined>(undefined)
 const AccountUpdateTokensContext = createContext<
