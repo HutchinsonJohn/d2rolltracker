@@ -3,16 +3,25 @@ import { memo } from 'react'
 import theme from '../../styles/theme'
 import { useManifest } from '../../context/ManifestContext'
 
-const WeaponImg = styled.img<{ iconUrl: string; borderColor?: string }>`
+const WeaponImg = styled.img<{
+  iconUrl: string
+  borderColor?: string
+  width?: string | number
+}>`
   background-image: ${(props) => `url(${props.iconUrl})`};
-  width: 50px;
-  height: 50px;
+  max-width: 50px;
+  width: ${(props) => props.width || '50px'};
+  aspect-ratio: 1/1;
   background-size: cover;
   border: 1px ${(props) => props.borderColor || theme.white} solid;
   box-sizing: border-box;
 `
 
-function WeaponIcon(props: { weaponHash: number; borderColor?: string }) {
+function WeaponIcon(props: {
+  weaponHash: number
+  borderColor?: string
+  width?: string | number
+}) {
   const manifest = useManifest()
   const weaponDef = manifest.DestinyInventoryItemDefinition[props.weaponHash]
   return (
@@ -22,6 +31,7 @@ function WeaponIcon(props: { weaponHash: number; borderColor?: string }) {
       iconUrl={`https://www.bungie.net${weaponDef.displayProperties.icon}`}
       src={`https://www.bungie.net${weaponDef.quality?.displayVersionWatermarkIcons[0]}`}
       borderColor={props.borderColor}
+      width={props.width}
     />
   )
 }

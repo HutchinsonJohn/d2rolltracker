@@ -9,6 +9,7 @@ import { Button, StyledLink } from './common/StyledComponents'
 const CookiePolicyContainer = styled.div`
   max-width: 800px;
   margin: auto;
+  padding: 1rem;
 `
 
 const CookieConsentDiv = styled.div`

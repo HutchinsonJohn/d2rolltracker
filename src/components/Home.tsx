@@ -12,16 +12,22 @@ import CharacterInventory, {
   SkeletonInventory,
 } from './common/CharacterInventory'
 import ErrorMessage from './error/ErrorMessage'
+import { isMobile } from '../styles/theme'
 
 const OuterGridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 410px);
   grid-gap: 30px;
   margin: 10px;
+
+  @media screen and ${isMobile} {
+    grid-template-columns: repeat(1, 100vw);
+  }
 `
 
 const FlexColumnCenterDiv = styled(FlexColumnDiv)`
   align-items: center;
+  text-align: center;
 `
 
 export default function Home() {

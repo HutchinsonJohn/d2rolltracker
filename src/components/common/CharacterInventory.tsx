@@ -22,7 +22,7 @@ const GridContainer = styled.div<{ columns: number }>`
 const WeaponLink = styled(Link)`
   all: 'unset';
 
-  :hover {
+  &:hover {
     filter: brightness(1.2);
   }
 `
@@ -30,7 +30,7 @@ const WeaponLink = styled(Link)`
 const NonWeaponDiv = styled.div`
   filter: brightness(0.6);
 
-  :hover {
+  &:hover {
     filter: brightness(0.7);
   }
 `
@@ -60,11 +60,17 @@ export default function CharacterInventory(props: {
               ].itemCategoryHashes?.includes(1) ?? false
             return selectable ? (
               <WeaponLink to={`/w/${item.itemHash}`} key={item.itemInstanceId}>
-                <WeaponIcon weaponHash={item.itemHash} />
+                <WeaponIcon
+                  weaponHash={item.itemHash}
+                  width="calc((100vw - 80px) / 7)"
+                />
               </WeaponLink>
             ) : (
               <NonWeaponDiv key={item.itemInstanceId}>
-                <WeaponIcon weaponHash={item.itemHash} />
+                <WeaponIcon
+                  weaponHash={item.itemHash}
+                  width="calc((100vw - 80px) / 7)"
+                />
               </NonWeaponDiv>
             )
           })}
@@ -79,7 +85,10 @@ export default function CharacterInventory(props: {
                   to={`/w/${item.itemHash}`}
                   key={item.itemInstanceId}
                 >
-                  <WeaponIcon weaponHash={item.itemHash} />
+                  <WeaponIcon
+                    weaponHash={item.itemHash}
+                    width="calc((100vw - 80px) / 7)"
+                  />
                 </WeaponLink>
               ))}
           </GridContainer>
@@ -96,7 +105,10 @@ export default function CharacterInventory(props: {
                   to={`/w/${item.itemHash}`}
                   key={item.itemInstanceId}
                 >
-                  <WeaponIcon weaponHash={item.itemHash} />
+                  <WeaponIcon
+                    weaponHash={item.itemHash}
+                    width="calc((100vw - 80px) / 7)"
+                  />
                 </WeaponLink>
               ))}
           </GridContainer>

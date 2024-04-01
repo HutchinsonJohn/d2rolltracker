@@ -4,6 +4,7 @@ import SearchBar from './SearchBar'
 import RefreshButton from './RefreshButton'
 import Profile from './Profile'
 import { isMobile } from '../../styles/theme'
+import HomeButton from './HomeButton'
 
 const NavbarDiv = styled.div`
   display: flex;
@@ -41,6 +42,7 @@ export default function Navbar() {
     <NavbarDiv>
       <RowDiv>
         <WebsiteNameLink to="/">d2rolltracker</WebsiteNameLink>
+        <HomeButton />
         <SearchBar />
         <RefreshButton />
         <Profile />

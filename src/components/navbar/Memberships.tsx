@@ -10,7 +10,7 @@ const MembershipButton = styled.button<{ active?: boolean }>`
   border: 2px solid transparent;
   ${({ active }) => active && 'border: 2px solid white;'}
 
-  :hover {
+  &:hover {
     filter: brightness(1.2);
   }
 `
