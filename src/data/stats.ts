@@ -7,6 +7,9 @@ const STATS: readonly {
   { name: 'Impact', hash: 4043523819, hasBar: true },
   { name: 'Range', hash: 1240592695, hasBar: true },
 
+  // Bows
+  { name: 'Accuracy', hash: 1591432999, hasBar: true },
+
   // Glaives
   { name: 'Shield Duration', hash: 1842278586, hasBar: true },
 
