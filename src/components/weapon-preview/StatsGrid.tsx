@@ -3,7 +3,7 @@ import { captureMessage } from '@sentry/react'
 import { Fragment, memo } from 'react'
 import theme from '../../styles/theme'
 import { interpolateStat } from '../../utils/perks'
-import STATS from '../../data/stats'
+import STATS, { CHARGE_TIME_STAT, DRAW_TIME_STAT } from '../../data/stats'
 import { useManifest } from '../../context/ManifestContext'
 import { MASTERWORK_TYPE_HASH } from '../../data/sockets'
 import { SelectedPerks } from '../../context/WeaponStateContext'
@@ -62,12 +62,8 @@ const StatNameDiv = styled.div`
     #000 0px 0px 1px;
 `
 
-const StatValueDiv = styled.div<{ change: number }>`
-  color: ${(props) => {
-    if (props.change > 0) return 'green'
-    if (props.change < 0) return 'red'
-    return theme.white
-  }};
+const StatValueDiv = styled.div<{ color: string }>`
+  color: ${(props) => props.color};
   text-shadow:
     #000 0px 0px 1px,
     #000 0px 0px 1px,
@@ -165,12 +161,25 @@ function StatsGrid(props: {
             ? perkStat || 0
             : interpolateStat(stat.value + (perkStat || 0), statDisplay) -
               baseStat
+        let color = theme.white
+        if (
+          stat.statTypeHash === DRAW_TIME_STAT.hash ||
+          stat.statTypeHash === CHARGE_TIME_STAT.hash
+        ) {
+          if (statChange > 0) {
+            color = 'red'
+          } else if (statChange < 0) {
+            color = 'green'
+          }
+        } else if (statChange > 0) {
+          color = 'green'
+        } else if (statChange < 0) {
+          color = 'red'
+        }
         return (
           <Fragment key={statObj.hash}>
             <StatNameDiv>{statObj.name}</StatNameDiv>
-            <StatValueDiv change={statChange}>
-              {baseStat + statChange}
-            </StatValueDiv>
+            <StatValueDiv color={color}>{baseStat + statChange}</StatValueDiv>
             {statObj.hasBar && (
               <StatBarBackgroundDiv>
                 <StatBarBaseDiv width={baseStat} />
