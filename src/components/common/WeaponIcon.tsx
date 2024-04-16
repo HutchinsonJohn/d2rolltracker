@@ -29,7 +29,12 @@ function WeaponIcon(props: {
       loading="lazy"
       title={weaponDef.displayProperties.name}
       iconUrl={`https://www.bungie.net${weaponDef.displayProperties.icon}`}
-      src={`https://www.bungie.net${weaponDef.quality?.displayVersionWatermarkIcons[0]}`}
+      src={
+        weaponDef.quality?.displayVersionWatermarkIcons[0] != null &&
+        weaponDef.quality?.displayVersionWatermarkIcons[0] !== ''
+          ? `https://www.bungie.net${weaponDef.quality.displayVersionWatermarkIcons[0]}`
+          : `https://www.bungie.net${weaponDef.displayProperties.icon}`
+      }
       borderColor={props.borderColor}
       width={props.width}
     />
