@@ -10,6 +10,7 @@ import DeleteButton from './DeleteButton'
 import ShareButton from '../common/ShareButton'
 import GodRollPreviewColumn from './GodRollPreviewColumn'
 import ViewButton from './ViewButton'
+import CopyButton from './CopyButton'
 
 const RollDiv = styled.div`
   background-color: ${theme.black90};
@@ -68,6 +69,10 @@ function GodRollPreview(props: {
       <FlexRowDiv>
         <ViewButton rollResponse={props.rollResponse} />
         <ShareButton URL={`${websiteURI}/r/${props.rollResponse.rollId}`} />
+        <CopyButton
+          rollResponse={props.rollResponse}
+          weaponHash={props.weaponHash}
+        />
         <DeleteButton
           rollResponse={props.rollResponse}
           weaponHash={props.weaponHash}

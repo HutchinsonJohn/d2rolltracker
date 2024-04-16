@@ -6,11 +6,10 @@ import {
   AccountState,
   AccountLogout,
 } from '../context/AccountStateContext'
-import { WeaponState } from '../context/WeaponStateContext'
+import { PreferredPerks } from '../context/WeaponStateContext'
 import { serverURI } from './url'
 import { GOD_ROLL, USER_GOD_ROLLS } from './queries'
 import { RollResponse } from './rolls'
-import { ListResponse } from './lists'
 import { UserError } from '../utils/error'
 import getTokensFromResponse from './updateTokens'
 import { saveTokensToLocalStorage } from '../utils/oauth'
@@ -18,15 +17,11 @@ import { saveTokensToLocalStorage } from '../utils/oauth'
 async function saveRoll(
   body: { rollName: string; listId: string; weaponHash: number },
   rollId: string | undefined,
-  weaponState: WeaponState,
+  preferredPerks: PreferredPerks,
   accountState: AccountState,
   updateTokens: AccountUpdateTokens,
 ) {
-  if (
-    !Object.values(weaponState.preferredPerks).some(
-      (column) => column.length > 0,
-    )
-  ) {
+  if (!Object.values(preferredPerks).some((column) => column.length > 0)) {
     throw new UserError('Please add at least one perk to the roll')
   }
   if (body.rollName.length < 2) {
@@ -38,7 +33,7 @@ async function saveRoll(
       method: rollId == null ? 'POST' : 'PUT',
       data: {
         ...body,
-        columns: weaponState.preferredPerks,
+        columns: preferredPerks,
       },
       headers: {
         Authorization: `Bearer ${accountState.accessToken}`,
@@ -88,26 +83,27 @@ function saveRollOnSuccess(
 export function useSaveRollMutation(
   rollId: string | undefined,
   weaponHash: number,
-  selectedList: ListResponse | undefined,
+  selectedListId: string | undefined,
   accountState: AccountState,
   updateTokens: AccountUpdateTokens,
-  weaponState: WeaponState,
+  rollName: string,
+  preferredPerks: PreferredPerks,
   queryClient: QueryClient,
   navigate: NavigateFunction,
 ) {
   return useMutation(
     async () => {
-      if (selectedList?.listId == null) {
+      if (selectedListId == null) {
         throw new Error('No list is selected')
       }
       return saveRoll(
         {
-          rollName: weaponState.rollName,
-          listId: selectedList.listId,
+          rollName,
+          listId: selectedListId,
           weaponHash,
         },
         rollId,
-        weaponState,
+        preferredPerks,
         accountState,
         updateTokens,
       )

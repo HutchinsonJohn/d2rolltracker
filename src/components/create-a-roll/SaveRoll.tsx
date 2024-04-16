@@ -66,10 +66,11 @@ function SaveRoll(props: { weaponHash: number; rollId: string | undefined }) {
   const saveMutation = useSaveRollMutation(
     props.rollId,
     props.weaponHash,
-    selectedList,
+    selectedList?.listId,
     accountState,
     updateTokens,
-    weaponState,
+    weaponState.rollName,
+    weaponState.preferredPerks,
     queryClient,
     navigate,
   )
